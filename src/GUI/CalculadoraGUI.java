@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import static Calculadora.Sintaxis.sintaxis;
+
 /**
  *
  * @author rojas
@@ -382,7 +384,14 @@ public class CalculadoraGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // Aqui va la funcionalidad
+        // Aqui va la funcionalidad del =
+        String cadena = textField1.getText();
+        boolean res = sintaxis(cadena);
+        if(res == false){
+            textField1.setText("SYNTAX ERROR");
+        }else{
+            
+        }
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
