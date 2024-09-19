@@ -1,3 +1,5 @@
+package Calculadora;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -8,6 +10,7 @@
  * @author peino
  */
 public class Sintaxis {
+    
     public static boolean balanceParentesis(String cadena){
         PilaArreglo<Character>  pila;
         pila=new PilaArreglo();
