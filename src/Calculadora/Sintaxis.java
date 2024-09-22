@@ -91,7 +91,7 @@ public class Sintaxis {
             }
             
             if (pos=='-'||pos=='+'){
-                if (i==0 || i==cadena.length()-1)
+                if (i==cadena.length()-1)
                     res=false;
                 else
                     if (esSimbolo(cadena, i+1))
