@@ -5,6 +5,8 @@
 package Calculadora;
 
 import java.util.Objects;
+import static java.lang.Double.parseDouble;
+import java.util.ArrayList;
 
 /**
  *
@@ -151,7 +153,74 @@ public class Calculadora {
         final Calculadora other = (Calculadora) obj;
         return Objects.equals(this.aCalcular, other.aCalcular);
     }
+
+    public static ArrayList<String> procesarPostfijo(String apostFijo) {
+        ArrayList<String> postfijo = new ArrayList<>();
+        int i = 0;
+        StringBuilder r = new StringBuilder();
+        String f;
+
+        while (i < apostFijo.length()) {
+            while (i < apostFijo.length() && apostFijo.charAt(i) != ' ') {  
+                r.append(apostFijo.charAt(i));
+                i++;
+            }
+
+            f = r.toString();
+            postfijo.add(f);
+            i++;
+            r = new StringBuilder();
+        }
+
+        return postfijo;
+    }
+
+     
     
+ public static double Calcula (ArrayList <String> post){
+     PilaADT<String> num = new pilas <>();
+     double resultado;
+     int i = 0;
+     double var1, var2;
+     while (i < post.size()){
+         switch (post.get(i)){
+             case "+" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado = var1 + var2;
+                 num.push(Double.toString(resultado));
+             }
+             case "-" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado= var1 - var2;
+                 num.push(Double.toString(resultado));
+             }
+             case "*" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado = var1 * var2;
+                 num.push(Double.toString(resultado));
+             }
+             case "/" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado = var2 / var1;
+                 num.push(Double.toString(resultado));
+             }
+             case "^" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado=Math.pow(var2,var1);
+                 num.push(Double.toString(resultado));     
+             }
+             default -> num.push(post.get(i));    
+         }
+         i++;
+     }
+     return parseDouble(num.pop());
+ }
+ 
     
 
 }
