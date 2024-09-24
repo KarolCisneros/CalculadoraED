@@ -75,7 +75,7 @@ public class Sintaxis {
             pos=cadena.charAt(i);
            
             if (pos=='.'){
-                if (punto!=false || i+1==cadena.length()&&esSimbolo(cadena, i-1) || i==0&&esSimbolo(cadena, i+1))
+                if (punto!=false || i+1==cadena.length()&&esSimbolo(cadena, i-1) || i==0&&esSimbolo(cadena, i+1) || esSimbolo(cadena, i+1)&&esSimbolo(cadena, i-1))
                     res=false;
                 punto=true;
             }
