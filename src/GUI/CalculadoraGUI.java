@@ -4,7 +4,9 @@
  */
 package GUI;
 
+import Calculadora.Calculadora;
 import static Calculadora.Sintaxis.sintaxis;
+import java.util.ArrayList;
 
 /**
  *
@@ -387,10 +389,17 @@ public class CalculadoraGUI extends javax.swing.JFrame {
         // Aqui va la funcionalidad del =
         String cadena = textField1.getText();
         boolean res = sintaxis(cadena);
-        if(res == false){
+        double resultado;
+        Calculadora calc = new Calculadora(cadena);
+            ArrayList<String> arr;
+        if(cadena.charAt(0)!='S'){
+            if(!res){
             textField1.setText("SYNTAX ERROR");
-        }else{
-            
+            }else{
+                arr = calc.procesarPostfijo(calc.aPostFijo());
+                resultado = calc.Calcula(arr);
+                textField1.setText(resultado +"");
+            }
         }
     }//GEN-LAST:event_jButton19ActionPerformed
 

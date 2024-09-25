@@ -12,7 +12,7 @@ package Calculadora;
 public class Prueba {
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println(Sintaxis.sintaxis("4-7"));
+        System.out.println(Sintaxis.sintaxis("-(-4+5+3*2)"));
         System.out.println(Sintaxis.balanceParentesis("()"));
     }
 }

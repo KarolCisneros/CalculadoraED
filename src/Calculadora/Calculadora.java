@@ -154,7 +154,7 @@ public class Calculadora {
         return Objects.equals(this.aCalcular, other.aCalcular);
     }
 
-    public static ArrayList<String> procesarPostfijo(String apostFijo) {
+    public ArrayList<String> procesarPostfijo(String apostFijo) {
         ArrayList<String> postfijo = new ArrayList<>();
         int i = 0;
         StringBuilder r = new StringBuilder();
@@ -177,50 +177,50 @@ public class Calculadora {
 
      
     
- public static double Calcula (ArrayList <String> post){
-     PilaADT<String> num = new pilas <>();
-     double resultado;
-     int i = 0;
-     double var1, var2;
-     while (i < post.size()){
-         switch (post.get(i)){
-             case "+" -> {
-                 var1 = parseDouble(num.pop());
-                 var2 = parseDouble(num.pop());
-                 resultado = var1 + var2;
-                 num.push(Double.toString(resultado));
-             }
-             case "-" -> {
-                 var1 = parseDouble(num.pop());
-                 var2 = parseDouble(num.pop());
-                 resultado= var1 - var2;
-                 num.push(Double.toString(resultado));
-             }
-             case "*" -> {
-                 var1 = parseDouble(num.pop());
-                 var2 = parseDouble(num.pop());
-                 resultado = var1 * var2;
-                 num.push(Double.toString(resultado));
-             }
-             case "/" -> {
-                 var1 = parseDouble(num.pop());
-                 var2 = parseDouble(num.pop());
-                 resultado = var2 / var1;
-                 num.push(Double.toString(resultado));
-             }
-             case "^" -> {
-                 var1 = parseDouble(num.pop());
-                 var2 = parseDouble(num.pop());
-                 resultado=Math.pow(var2,var1);
-                 num.push(Double.toString(resultado));     
-             }
-             default -> num.push(post.get(i));    
-         }
-         i++;
-     }
-     return parseDouble(num.pop());
- }
- 
+    public double Calcula (ArrayList <String> post){
+        PilaADT<String> num = new PilaArreglo<>();
+        double resultado;
+        int i = 0;
+        double var1, var2;
+        while (i < post.size()){
+            switch (post.get(i)){
+                case "+" -> {
+                    var1 = parseDouble(num.pop());
+                    var2 = parseDouble(num.pop());
+                    resultado = var1 + var2;
+                    num.push(Double.toString(resultado));
+                }
+                case "-" -> {
+                    var1 = parseDouble(num.pop());
+                    var2 = parseDouble(num.pop());
+                    resultado= var2 - var1;
+                    num.push(Double.toString(resultado));
+                }
+                case "*" -> {
+                    var1 = parseDouble(num.pop());
+                    var2 = parseDouble(num.pop());
+                    resultado = var1 * var2;
+                    num.push(Double.toString(resultado));
+                }
+                case "/" -> {
+                    var1 = parseDouble(num.pop());
+                    var2 = parseDouble(num.pop());
+                    resultado = var2 / var1;
+                    num.push(Double.toString(resultado));
+                }
+                case "^" -> {
+                    var1 = parseDouble(num.pop());
+                    var2 = parseDouble(num.pop());
+                    resultado=Math.pow(var2,var1);
+                    num.push(Double.toString(resultado));     
+                }
+                default -> num.push(post.get(i));    
+            }
+            i++;
+        }
+        return parseDouble(num.pop());
+    }
+
     
 
 }

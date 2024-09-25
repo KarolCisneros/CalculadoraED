@@ -14,7 +14,7 @@ public class PruebaCalc {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String a = "-2+4-(5+2)";
+        String a = "-(-4+5+3*2)";
         Calculadora calc = new Calculadora(a);
         System.out.println(calc.aPostFijo());
     }
