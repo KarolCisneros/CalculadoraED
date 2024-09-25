@@ -49,11 +49,11 @@ public class Sintaxis {
         return res;
     }
     
-    public static boolean esSimboloSinMenos(String cadena, int pos){
+    public static boolean esSimboloSinMenosMas(String cadena, int pos){
         boolean res;
         char i;
         i=cadena.charAt(pos);
-        if (i=='*'||i=='/'||i=='+'||i=='^')
+        if (i=='*'||i=='/'||i=='^')
             res=true;
         else
             res=false;
@@ -87,7 +87,7 @@ public class Sintaxis {
                 if (i==0 || i==cadena.length()-1)
                     res=false;
                 else
-                    if (esSimbolo(cadena, i-1)||esSimboloSinMenos(cadena, i+1))
+                    if (esSimbolo(cadena, i-1)||esSimboloSinMenosMas(cadena, i+1))
                         res=false;
                 punto=false;
                 
@@ -105,7 +105,7 @@ public class Sintaxis {
                 if (i!=0)
                     if (!esSimbolo(cadena, i-1)&&cadena.charAt(i-1)!='(')
                         res=false;    
-                if (esSimboloSinMenos(cadena, i+1)||cadena.charAt(i+1)==')')
+                if (esSimboloSinMenosMas(cadena, i+1)||cadena.charAt(i+1)==')')
                     res=false;
             }
             
