@@ -6,7 +6,7 @@ package Calculadora;
  */
 
 /**
- *
+ *Breve prueba para la lógica del método Sintaxis
  * @author peino
  */
 public class Prueba {
