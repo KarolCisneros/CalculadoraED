@@ -102,7 +102,7 @@ public class Sintaxis {
                 if (i!=0)
                     if (!esSimbolo(cadena, i-1)&&cadena.charAt(i-1)!='(')
                         res=false;    
-                if (esSimbolo(cadena, i+1)||cadena.charAt(i+1)==')')
+                if (esSimboloSinMenos(cadena, i+1)||cadena.charAt(i+1)==')')
                     res=false;
             }
             
