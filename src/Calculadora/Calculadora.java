@@ -13,13 +13,11 @@ import java.util.ArrayList;
  * @author rojas
  */
 public class Calculadora {
-    private String aCalcular;
+    
 
-    public Calculadora(String aCalcular) {
-        this.aCalcular = aCalcular;
-    }
+    
         
-    public int precedencia(char a) {
+    public static int precedencia(char a) {
         int res;
 
         res = switch (a) {
@@ -32,12 +30,12 @@ public class Calculadora {
         return res;
     }
 
-   public static String aPostFijo(String aCalcular) {
+    public static String aPostFijo(String aCalcular) {
 
         //String de salida en postfijo
         StringBuilder salida = new StringBuilder();
         //Pila de operadores
-        Stack<Character> operadores = new Stack();
+        PilaADT<Character> operadores = new PilaArreglo();
         //Se declara variable para mayor facilidad al evaular, en lugar de utilizar charAt(i) cada vez
         char evaluando;
         //Booleano para evaluar si es operador unario o binario
@@ -46,86 +44,72 @@ public class Calculadora {
         for (int i = 0; i < aCalcular.length(); i++) {
             evaluando = aCalcular.charAt(i);
 
-            //DEcimales o letras
-            if (Character.isDigit(evaluando) || evaluando == '.' || Character.isLetter(evaluando)) {
-                salida.append(evaluando);
-                //Ver si el siguiente espacio sigue siendo el número
-                while (i + 1 < aCalcular.length() && (Character.isDigit(aCalcular.charAt(i + 1)) || aCalcular.charAt(i + 1) == '.')) {
-                    i++;
-                    salida.append(aCalcular.charAt(i));
-                }
-                //Agregar espacio
-                salida.append(" ");
-                unario = false;
+            //Número, decimales o letras
+            if(Character.isDigit(evaluando) || evaluando=='.' || Character.isLetter(evaluando)) {
+            	salida.append(evaluando);
+            	//Ver si el siguiente espacio sigue siendo el número
+            	while (i+1 < aCalcular.length() && (Character.isDigit(aCalcular.charAt(i+1)) || aCalcular.charAt(i+1) == '.' )) {
+            		i++;
+            		salida.append(aCalcular.charAt(i));
+            	}
+            	//Agregar espacio
+            	salida.append(" ");
+            	unario = false;
             } else {
+            
+            switch (evaluando) {
+                //Si abre, agrega
+                case '(':
+                    operadores.push(evaluando);
+                    unario = true;
+                    break;
 
-                switch (evaluando) {
-                    //Si abre, agrega
-                    case '(':
-                        operadores.push(evaluando);
-                        unario = true;
-                        break;
-
-                    //Si encuentra operador, evalua precedencia; si es menor a la evaluada
-                    //entonces saca la de menor precedencia y mete la siguiente
-                    case '/':
-                    case '*':
-                        while (!operadores.isEmpty() && precedencia(evaluando) <= precedencia(operadores.peek())) {
-                            salida.append(operadores.pop()).append(" ");
-                        }
-                        operadores.push(evaluando);
-                        unario = true;
-                        break;
-
-                        //para las potencias es estrictamente menor, si no se apilan y sale mal
-                    case '^':
-                        while (!operadores.isEmpty() && precedencia(evaluando) < precedencia(operadores.peek())) {
-                            salida.append(operadores.pop()).append(" ");
-                        }
-                        operadores.push(evaluando);
-                        unario = true;
-                        break;
-                    //aqui esta la posibilidad de encontrar unarios, por eso se separa
-                    case '+':
-                    case '-':
-                        //aqui evalua si puede ser unario; si si lo es, lo agrega a la salida y no lo trata como operador
-                        //Adicionalmente, se agrega espacio para facilidad de lectura
-                        if (unario) {
-                            //como empieza en true el unario, hay que preguntar si hay parentesis para que marque correctamente todo lo de adentro como negativo
-                            if (aCalcular.charAt(i + 1) == '(') {
-                                operadores.push(evaluando);
-                            } else {
-                                salida.append(evaluando);
-                                //despues apaga la bandera porque no puede haber dos unarios juntos
-                                unario = false;
-                            }
-
-                        } //si no lo es, hace lo normal, y prende la bandera en caso de que sea 1+ -1
-                        //
-                        else {
-                            while (!operadores.isEmpty() && precedencia(evaluando) <= precedencia(operadores.peek())) {
-                                salida.append(operadores.pop()).append(" ");
-                            }
-                            operadores.push(evaluando);
-                        }
-                        unario = true;
-                        break;
+                //Si encuentra operador, evalua precedencia; si es menor a la evaluada
+                //entonces saca la de menor precedencia y mete la siguiente
+                case '/':
+                case '*':
+                case '^':
+                    while (!operadores.isEmpty() && precedencia(evaluando) <= precedencia(operadores.peek())) {
+                        salida.append(operadores.pop()).append(" ");
+                    }
+                    operadores.push(evaluando);
+                    unario = true;
+                    break;
+                //aqui esta la posibilidad de encontrar unarios, por eso se separa
+                case '+':
+                case '-':
+                    //aqui evalua si puede ser unario; si si lo es, lo agrega a la salida y no lo trata como operador
+                    //Adicionalmente, se agrega espacio para facilidad de lectura
+                    if (unario) {
+                    	
+                    	salida.append("0 ");
+                    	operadores.push(evaluando);
+                    	} else {
+                    		//Operador binario
+                    		while(!operadores.isEmpty() && precedencia(evaluando) <= precedencia(operadores.peek())) {
+                    			salida.append(operadores.pop()).append(" ");
+                    		}
+                    		operadores.push(evaluando);
+                       
+                    }
+                   //si no lo es, hace lo normal, y prende la bandera en caso de que sea 1+ -1
+                    unario=true;
+                    break;
 
 //               
-                    case ')':
-                        while (!operadores.isEmpty() && operadores.peek() != '(') {
-                            salida.append(operadores.pop()).append(" ");
-                        }
-                        if (!operadores.isEmpty()) {
-                            operadores.pop(); //Elimina el paréntesis que abre
+                case ')':
+                    while (!operadores.isEmpty() && operadores.peek() != '(') {
+                        salida.append(operadores.pop()).append(" ");
+                    }
+                    if(!operadores.isEmpty()) {
+                    	operadores.pop(); //Elimina el paréntesis que abre
+                    }
+                    unario = false;
+                    break;
 
-                        }
-                        unario = false;
-                        break;
-
-                    default:
-                        break;
-                }
+                default:
+                    break;
+            	}
             }
         }
 
@@ -137,34 +121,6 @@ public class Calculadora {
 
     }
 
-    public String getaCalcular() {
-        return aCalcular;
-    }
-
-    public void setaCalcular(String aCalcular) {
-        this.aCalcular = aCalcular;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Calculadora other = (Calculadora) obj;
-        return Objects.equals(this.aCalcular, other.aCalcular);
-    }
 
     public static ArrayList<String> procesarPostfijo(String apostFijo) {
         ArrayList<String> postfijo = new ArrayList<>();
@@ -190,7 +146,7 @@ public class Calculadora {
      
     
  public static double Calcula (ArrayList <String> post){
-     PilaADT<String> num = new pilas <>();
+     PilaADT<String> num = new PilaArreglo <>();
      double resultado;
      int i = 0;
      double var1, var2;
@@ -205,7 +161,7 @@ public class Calculadora {
              case "-" -> {
                  var1 = parseDouble(num.pop());
                  var2 = parseDouble(num.pop());
-                 resultado= var1 - var2;
+                 resultado= var2 - var1;
                  num.push(Double.toString(resultado));
              }
              case "*" -> {
@@ -236,4 +192,3 @@ public class Calculadora {
     
 
 }
-
