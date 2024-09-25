@@ -13,13 +13,11 @@ import java.util.ArrayList;
  * @author rojas
  */
 public class Calculadora {
-    private String aCalcular;
+    
 
-    public Calculadora(String aCalcular) {
-        this.aCalcular = aCalcular;
-    }
+    
         
-    public int precedencia(char a) {
+    public static int precedencia(char a) {
         int res;
 
         res = switch (a) {
@@ -32,12 +30,12 @@ public class Calculadora {
         return res;
     }
 
-    public String aPostFijo() {
+    public static String aPostFijo(String aCalcular) {
 
         //String de salida en postfijo
         StringBuilder salida = new StringBuilder();
         //Pila de operadores
-        PilaADT<Character> operadores = new PilaArreglo<>();
+        PilaADT<Character> operadores = new PilaArreglo();
         //Se declara variable para mayor facilidad al evaular, en lugar de utilizar charAt(i) cada vez
         char evaluando;
         //Booleano para evaluar si es operador unario o binario
@@ -46,7 +44,7 @@ public class Calculadora {
         for (int i = 0; i < aCalcular.length(); i++) {
             evaluando = aCalcular.charAt(i);
 
-            //DEcimales o letras
+            //Número, decimales o letras
             if(Character.isDigit(evaluando) || evaluando=='.' || Character.isLetter(evaluando)) {
             	salida.append(evaluando);
             	//Ver si el siguiente espacio sigue siendo el número
@@ -83,18 +81,19 @@ public class Calculadora {
                     //aqui evalua si puede ser unario; si si lo es, lo agrega a la salida y no lo trata como operador
                     //Adicionalmente, se agrega espacio para facilidad de lectura
                     if (unario) {
-                        salida.append(evaluando);
-                        //despues apaga la bandera porque no puede haber dos unarios juntos
-                        unario = false;
-                    } //si no lo es, hace lo normal, y prende la bandera en caso de que sea 1+ -1
-                    //
-                    else {
-                        while (!operadores.isEmpty() && precedencia(evaluando) <= precedencia(operadores.peek())) {
-                            salida.append(operadores.pop()).append(" ");
-                        }
-                        operadores.push(evaluando);
+                    	
+                    	salida.append("0 ");
+                    	operadores.push(evaluando);
+                    	} else {
+                    		//Operador binario
+                    		while(!operadores.isEmpty() && precedencia(evaluando) <= precedencia(operadores.peek())) {
+                    			salida.append(operadores.pop()).append(" ");
+                    		}
+                    		operadores.push(evaluando);
+                       
                     }
-                    unario = true;
+                   //si no lo es, hace lo normal, y prende la bandera en caso de que sea 1+ -1
+                    unario=true;
                     break;
 
 //               
@@ -104,10 +103,7 @@ public class Calculadora {
                     }
                     if(!operadores.isEmpty()) {
                     	operadores.pop(); //Elimina el paréntesis que abre
-
-
-
-}
+                    }
                     unario = false;
                     break;
 
@@ -125,34 +121,6 @@ public class Calculadora {
 
     }
 
-    public String getaCalcular() {
-        return aCalcular;
-    }
-
-    public void setaCalcular(String aCalcular) {
-        this.aCalcular = aCalcular;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Calculadora other = (Calculadora) obj;
-        return Objects.equals(this.aCalcular, other.aCalcular);
-    }
 
     public ArrayList<String> procesarPostfijo(String apostFijo) {
         ArrayList<String> postfijo = new ArrayList<>();
@@ -177,51 +145,51 @@ public class Calculadora {
 
      
     
-    public double Calcula (ArrayList <String> post){
-        PilaADT<String> num = new PilaArreglo<>();
-        double resultado;
-        int i = 0;
-        double var1, var2;
-        while (i < post.size()){
-            switch (post.get(i)){
-                case "+" -> {
-                    var1 = parseDouble(num.pop());
-                    var2 = parseDouble(num.pop());
-                    resultado = var1 + var2;
-                    num.push(Double.toString(resultado));
-                }
-                case "-" -> {
-                    var1 = parseDouble(num.pop());
-                    var2 = parseDouble(num.pop());
-                    resultado= var2 - var1;
-                    num.push(Double.toString(resultado));
-                }
-                case "*" -> {
-                    var1 = parseDouble(num.pop());
-                    var2 = parseDouble(num.pop());
-                    resultado = var1 * var2;
-                    num.push(Double.toString(resultado));
-                }
-                case "/" -> {
-                    var1 = parseDouble(num.pop());
-                    var2 = parseDouble(num.pop());
-                    resultado = var2 / var1;
-                    num.push(Double.toString(resultado));
-                }
-                case "^" -> {
-                    var1 = parseDouble(num.pop());
-                    var2 = parseDouble(num.pop());
-                    resultado=Math.pow(var2,var1);
-                    num.push(Double.toString(resultado));     
-                }
-                default -> num.push(post.get(i));    
-            }
-            i++;
-        }
-        return parseDouble(num.pop());
-    }
-
+ public static double Calcula (ArrayList <String> post){
+     PilaADT<String> num = new PilaArreglo <>();
+     double resultado;
+     int i = 0;
+     double var1, var2;
+     while (i < post.size()){
+         switch (post.get(i)){
+             case "+" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado = var1 + var2;
+                 num.push(Double.toString(resultado));
+             }
+             case "-" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado= var2 - var1;
+                 num.push(Double.toString(resultado));
+             }
+             case "*" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado = var1 * var2;
+                 num.push(Double.toString(resultado));
+             }
+             case "/" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado = var2 / var1;
+                 num.push(Double.toString(resultado));
+             }
+             case "^" -> {
+                 var1 = parseDouble(num.pop());
+                 var2 = parseDouble(num.pop());
+                 resultado=Math.pow(var2,var1);
+                 num.push(Double.toString(resultado));     
+             }
+             default -> num.push(post.get(i));    
+         }
+         i++;
+     }
+     return parseDouble(num.pop());
+ }
+ 
+>>>>>>> 56f4b9e7266de2587ed825db5ac0269785a348e9
     
 
 }
-
