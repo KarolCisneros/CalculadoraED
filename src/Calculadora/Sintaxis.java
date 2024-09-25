@@ -121,7 +121,7 @@ public class Sintaxis {
                 if (i==cadena.length()-1)
                     res=false;
                 else
-                    if (esSimbolo(cadena, i+1))
+                    if (esSimboloSinMenosMas(cadena, i+1))
                         res=false;
                 punto=false;
             }
