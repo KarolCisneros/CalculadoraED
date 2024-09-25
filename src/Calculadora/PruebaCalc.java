@@ -5,7 +5,7 @@
 package Calculadora;
 
 /**
- *
+ *Breve prueba para la lógica de {@code aPostFijo}
  * @author rojas
  */
 public class PruebaCalc {
