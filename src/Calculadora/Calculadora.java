@@ -9,13 +9,34 @@ import static java.lang.Double.parseDouble;
 import java.util.ArrayList;
 
 /**
- *
- * @author rojas
+ * La clase Calculadora proporciona métodos para convertir una expresión infija a postfija,
+ * procesar la notación postfija y calcular el resultado de una expresión aritmética en notación postfija.
+ * 
+ * Incluye las siguientes funcionalidades: 
+ <ul>
+ *   <li>Evaluación de precedencia</li>
+ *   <li>Manejo de operadores unarios y binarios</li>
+ *   <li>Realización de operaciones básicas de suma, resta, multiplicación, división y exponenciación</li>
+ * </ul>
+ 
+ * 
+ * @author GPO ""
  */
 public class Calculadora {
     
 
-    
+    /**
+     * Determina la precedencia de los operadores para conversión a PostFijo.
+     * 
+     * @param a char: El operador aritmético a evaluar ('+', '-', '*', '/', '^').
+     * @return Un entero que representa la precedencia del operador. Retorna:
+     *         <ul>
+     *           <li>1 si el operador es '+' o '-'</li>
+     *           <li>2 si el operador es '*' o '/'</li>
+     *           <li>3 si el operador es '^'</li>
+     *           <li>-1 si no es un operador conocido</li>
+     *         </ul>
+     */
         
     public static int precedencia(char a) {
         int res;
@@ -30,6 +51,13 @@ public class Calculadora {
         return res;
     }
 
+
+    /**
+     * Convierte una expresión infija a notación postfija para poder ser operada.
+     * 
+     * @param String: aCalcular La expresión aritmética en formato infijo.
+     * @return Una cadena que representa la expresión en notación postfija.
+     */
     public static String aPostFijo(String aCalcular) {
 
         //String de salida en postfijo
@@ -122,6 +150,12 @@ public class Calculadora {
     }
 
 
+     /**
+     * Convierte una cadena de notación postfija a una lista de sus componentes (números y operadores).
+     * 
+     * @param apostFijo Una cadena que contiene la expresión en notación postfija.
+     * @return Una lista de componentes (números y operadores) que componen la expresión postfija (ArrayList)
+     */
     public static ArrayList<String> procesarPostfijo(String apostFijo) {
         ArrayList<String> postfijo = new ArrayList<>();
         int i = 0;
@@ -144,6 +178,12 @@ public class Calculadora {
     }
 
      
+/**
+     * Calcula el valor de una expresión en notación postfija.
+     * 
+     * @param post Una lista que contiene la expresión aritmética en notación postfija.
+     * @return El valor de la expresión.
+     */
     
  public static double Calcula (ArrayList <String> post){
      PilaADT<String> num = new PilaArreglo <>();

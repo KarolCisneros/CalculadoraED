@@ -6,10 +6,16 @@ package Calculadora;
  */
 
 /**
- *
- * @author peino
+ * Esta clase permite detectar errores de sintaxis a la hora de ingresar una posible operación
+ * @author Karol Cisneros
+ * 
  */
 public class Sintaxis {
+    /**
+     * Este metodo permite detectar si los paréntesis en una expresión están correctamente balanceados
+     * @param cadena El texto del que se quiere comprobar que sus paréntesis estén balanceados
+     * @return Regresa un boolean mostrando si es correcto o no el balance de paréntesis
+     */
     
     public static boolean balanceParentesis(String cadena){
         PilaArreglo<Character>  pila;
@@ -38,6 +44,13 @@ public class Sintaxis {
         return res;
             
     }
+
+    /**
+     * Este método detecta si el char en una determinada posición de la cadena es un símbolo
+     * @param cadena La cadena de texto que se quiere analizar
+     * @param pos La posición de un elemento Character de la cadena
+     * @return Regresa un boolean, detectando si el char en la posición pos es un simbolo (+, -, *,/,^ )
+     */
     public static boolean esSimbolo(String cadena, int pos){
         boolean res;
         char i;
@@ -49,17 +62,28 @@ public class Sintaxis {
         return res;
     }
     
-    public static boolean esSimboloSinMenos(String cadena, int pos){
+    /**
+     * Este método detecta si el char en una determinada posición de la cadena es un símbolo (excepto - y +)
+     * @param cadena La cadena de texto que se quiere analizar
+     * @param pos La posición de un elemento Character de la cadena
+     * @return Regresa un boolean, detectando si el char en la posición pos es un simbolo excepto - (+, *,/,^ )
+     */
+    public static boolean esSimboloSinMenosMas(String cadena, int pos){
         boolean res;
         char i;
         i=cadena.charAt(pos);
-        if (i=='*'||i=='/'||i=='+'||i=='^')
+        if (i=='*'||i=='/'||i=='^')
             res=true;
         else
             res=false;
         return res;
     }
-    
+
+    /**
+     * Este método estático, con ayuda de los otros, detecta finalmente si la cadena contiene o no un error de sintaxis
+     * @param cadena La cadena de texto que se quiere analizar
+     * @return Regresa un boolean, detectando si el la cadena contiene algún error de sintaxis
+     */
     
     public static boolean sintaxis(String cadena){
         boolean res, punto;
@@ -87,7 +111,7 @@ public class Sintaxis {
                 if (i==0 || i==cadena.length()-1)
                     res=false;
                 else
-                    if (esSimbolo(cadena, i-1)||esSimboloSinMenos(cadena, i+1))
+                    if (esSimbolo(cadena, i-1)||esSimboloSinMenosMas(cadena, i+1))
                         res=false;
                 punto=false;
                 
@@ -97,7 +121,7 @@ public class Sintaxis {
                 if (i==cadena.length()-1)
                     res=false;
                 else
-                    if (esSimbolo(cadena, i+1))
+                    if (esSimboloSinMenosMas(cadena, i+1))
                         res=false;
                 punto=false;
             }
@@ -105,7 +129,7 @@ public class Sintaxis {
                 if (i!=0)
                     if (!esSimbolo(cadena, i-1)&&cadena.charAt(i-1)!='(')
                         res=false;    
-                if (esSimboloSinMenos(cadena, i+1)||cadena.charAt(i+1)==')')
+                if (esSimboloSinMenosMas(cadena, i+1)||cadena.charAt(i+1)==')')
                     res=false;
             }
             
