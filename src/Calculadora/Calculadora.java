@@ -20,7 +20,7 @@ import java.util.ArrayList;
  * </ul>
  
  * 
- * @author GPO ""
+ * @author GPO 1
  */
 public class Calculadora {
     
