@@ -390,10 +390,11 @@ public class CalculadoraGUI extends javax.swing.JFrame {
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         // Aquí va el método
         String cadena = textField1.getText();
-        boolean res = sintaxis(cadena);
+        boolean res;
         double resultado;
         ArrayList<String> arr;
-        if(cadena.charAt(0)!='S'){
+        if(!cadena.equals("") && cadena.charAt(0)!='S'){
+            res=sintaxis(cadena);
             if(!res){
                 textField1.setText("SYNTAX ERROR");
             }else{
