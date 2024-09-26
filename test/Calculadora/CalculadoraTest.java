@@ -147,35 +147,110 @@ public class CalculadoraTest {
     }
 
     /**
-     * Prueba con expresiones incompletas y vacías.
-     */
-
-    /**
-     * Test of procesarPostfijo method, of class Calculadora.
+     *Prueba del método ProcesarPostfijo de la clase Calculadora
      */
     @Test
-    public void testProcesarPostfijo() {
-        System.out.println("procesarPostfijo");
-        String apostFijo = "";
-        ArrayList<String> expResult = null;
-        ArrayList<String> result = Calculadora.procesarPostfijo(apostFijo);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testProcesarPostfijo() {
+        // Prueba 1: Verifica la conversión de una expresión simple
+        String expresion = "3 4 + 2 *";
+        ArrayList<String> resultadoEsperado = new ArrayList<>();
+        resultadoEsperado.add("3");
+        resultadoEsperado.add("4");
+        resultadoEsperado.add("+");
+        resultadoEsperado.add("2");
+        resultadoEsperado.add("*");
+        
+        ArrayList<String> resultado = Calculadora.procesarPostfijo(expresion);
+        
+        assertEquals(resultadoEsperado, resultado);
+    }
+    
+    @Test
+    void testProcesarPostfijoEspaciosExtra() {
+        // Prueba 2: Verifica el manejo de espacios adicionales
+        String expresion = "3   4 + 2    *";
+        ArrayList<String> resultadoEsperado = new ArrayList<>();
+        resultadoEsperado.add("3");
+        resultadoEsperado.add("4");
+        resultadoEsperado.add("+");
+        resultadoEsperado.add("2");
+        resultadoEsperado.add("*");
+        
+        ArrayList<String> resultado = Calculadora.procesarPostfijo(expresion);
+        
+        assertEquals(resultadoEsperado, resultado);
+    }
+    
+    @Test
+    void testProcesarPostfijoVacio() {
+        // Prueba 3: Verifica el manejo de una cadena vacía
+        String expresion = "";
+        ArrayList<String> resultadoEsperado = new ArrayList<>();
+        
+        ArrayList<String> resultado = Calculadora.procesarPostfijo(expresion);
+        
+        assertEquals(resultadoEsperado, resultado);
     }
 
     /**
-     * Test of Calcula method, of class Calculadora.
+     * Prueba del método calcula de la clase calculadora
      */
+   @Test
+    void testCalculaSuma() {
+        // Prueba 1: Verifica la suma en notación postfija
+        ArrayList<String> expresion = new ArrayList<>();
+        expresion.add("3");
+        expresion.add("4");
+        expresion.add("+");
+        
+        double resultadoEsperado = 7.0;
+        double resultado = Calculadora.Calcula(expresion);
+        
+        assertEquals(resultadoEsperado, resultado);
+    }
+
     @Test
-    public void testCalcula() {
-        System.out.println("Calcula");
-        ArrayList<String> post = null;
-        double expResult = 0.0;
-        double result = Calculadora.Calcula(post);
-        assertEquals(expResult, result, 0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    void testCalculaMultiplicacion() {
+        // Prueba 2: Verifica la multiplicación en notación postfija
+        ArrayList<String> expresion = new ArrayList<>();
+        expresion.add("3");
+        expresion.add("4");
+        expresion.add("2");
+        expresion.add("*");
+        expresion.add("+");
+        
+        double resultadoEsperado = 11.0;
+        double resultado = Calculadora.Calcula(expresion);
+        
+        assertEquals(resultadoEsperado, resultado);
+    }
+    
+    @Test
+    void testCalculaDivision() {
+        // Prueba 3: Verifica la división en notación postfija
+        ArrayList<String> expresion = new ArrayList<>();
+        expresion.add("10");
+        expresion.add("5");
+        expresion.add("/");
+        
+        double resultadoEsperado = 2.0;
+        double resultado = Calculadora.Calcula(expresion);
+        
+        assertEquals(resultadoEsperado, resultado);
+    }
+    
+    @Test
+    void testCalculaPotencia() {
+        // Prueba 4: Verifica la operación de potencia en notación postfija
+        ArrayList<String> expresion = new ArrayList<>();
+        expresion.add("2");
+        expresion.add("3");
+        expresion.add("^");
+        
+        double resultadoEsperado = 8.0;
+        double resultado = Calculadora.Calcula(expresion);
+        
+        assertEquals(resultadoEsperado, resultado);
     }
     
 }
