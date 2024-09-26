@@ -122,7 +122,7 @@ public class Calculadora {
     }
 
 
-    public ArrayList<String> procesarPostfijo(String apostFijo) {
+    public static ArrayList<String> procesarPostfijo(String apostFijo) {
         ArrayList<String> postfijo = new ArrayList<>();
         int i = 0;
         StringBuilder r = new StringBuilder();
@@ -189,7 +189,4 @@ public class Calculadora {
      return parseDouble(num.pop());
  }
  
->>>>>>> 56f4b9e7266de2587ed825db5ac0269785a348e9
-    
-
 }

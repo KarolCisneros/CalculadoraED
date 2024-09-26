@@ -5,12 +5,14 @@
 package GUI;
 
 import Calculadora.Calculadora;
+import static Calculadora.Calculadora.Calcula;
+import static Calculadora.Calculadora.aPostFijo;
 import static Calculadora.Sintaxis.sintaxis;
 import java.util.ArrayList;
 
 /**
  *
- * @author rojas
+ * @author GPO 1
  */
 public class CalculadoraGUI extends javax.swing.JFrame {
 
@@ -283,7 +285,7 @@ public class CalculadoraGUI extends javax.swing.JFrame {
         jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
         textField1.setBackground(new java.awt.Color(204, 204, 204));
-        textField1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textField1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         textField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textField1ActionPerformed(evt);
@@ -386,19 +388,17 @@ public class CalculadoraGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        // Aqui va la funcionalidad del =
+        // Aquí va el método
         String cadena = textField1.getText();
         boolean res = sintaxis(cadena);
         double resultado;
-        Calculadora calc = new Calculadora(cadena);
-            ArrayList<String> arr;
+        ArrayList<String> arr;
         if(cadena.charAt(0)!='S'){
             if(!res){
-            textField1.setText("SYNTAX ERROR");
+                textField1.setText("SYNTAX ERROR");
             }else{
-                arr = calc.procesarPostfijo(calc.aPostFijo());
-                resultado = calc.Calcula(arr);
-                textField1.setText(resultado +"");
+                resultado = Calcula(Calculadora.procesarPostfijo(aPostFijo(cadena)));
+                textField1.setText(resultado + "");
             }
         }
     }//GEN-LAST:event_jButton19ActionPerformed
