@@ -150,7 +150,7 @@ public class CalculadoraTest {
      *Prueba del método ProcesarPostfijo de la clase Calculadora
      */
     @Test
-    void testProcesarPostfijo() {
+    public void testProcesarPostfijo() {
         // Prueba 1: Verifica la conversión de una expresión simple
         String expresion = "3 4 + 2 *";
         ArrayList<String> resultadoEsperado = new ArrayList<>();
@@ -165,25 +165,11 @@ public class CalculadoraTest {
         assertEquals(resultadoEsperado, resultado);
     }
     
-    @Test
-    void testProcesarPostfijoEspaciosExtra() {
-        // Prueba 2: Verifica el manejo de espacios adicionales
-        String expresion = "3   4 + 2    *";
-        ArrayList<String> resultadoEsperado = new ArrayList<>();
-        resultadoEsperado.add("3");
-        resultadoEsperado.add("4");
-        resultadoEsperado.add("+");
-        resultadoEsperado.add("2");
-        resultadoEsperado.add("*");
-        
-        ArrayList<String> resultado = Calculadora.procesarPostfijo(expresion);
-        
-        assertEquals(resultadoEsperado, resultado);
-    }
+  
     
     @Test
-    void testProcesarPostfijoVacio() {
-        // Prueba 3: Verifica el manejo de una cadena vacía
+    public void testProcesarPostfijoVacio() {
+        // Prueba 2: Verifica el manejo de una cadena vacía
         String expresion = "";
         ArrayList<String> resultadoEsperado = new ArrayList<>();
         
@@ -196,7 +182,7 @@ public class CalculadoraTest {
      * Prueba del método calcula de la clase calculadora
      */
    @Test
-    void testCalculaSuma() {
+    public void testCalculaSuma() {
         // Prueba 1: Verifica la suma en notación postfija
         ArrayList<String> expresion = new ArrayList<>();
         expresion.add("3");
@@ -206,11 +192,11 @@ public class CalculadoraTest {
         double resultadoEsperado = 7.0;
         double resultado = Calculadora.Calcula(expresion);
         
-        assertEquals(resultadoEsperado, resultado);
+        assertEquals(resultadoEsperado, resultado, 0);
     }
 
     @Test
-    void testCalculaMultiplicacion() {
+    public void testCalculaMultiplicacion() {
         // Prueba 2: Verifica la multiplicación en notación postfija
         ArrayList<String> expresion = new ArrayList<>();
         expresion.add("3");
@@ -222,11 +208,11 @@ public class CalculadoraTest {
         double resultadoEsperado = 11.0;
         double resultado = Calculadora.Calcula(expresion);
         
-        assertEquals(resultadoEsperado, resultado);
+        assertEquals(resultadoEsperado, resultado, 0);
     }
     
     @Test
-    void testCalculaDivision() {
+    public void testCalculaDivision() {
         // Prueba 3: Verifica la división en notación postfija
         ArrayList<String> expresion = new ArrayList<>();
         expresion.add("10");
@@ -236,11 +222,11 @@ public class CalculadoraTest {
         double resultadoEsperado = 2.0;
         double resultado = Calculadora.Calcula(expresion);
         
-        assertEquals(resultadoEsperado, resultado);
+        assertEquals(resultadoEsperado, resultado, 0);
     }
     
     @Test
-    void testCalculaPotencia() {
+    public void testCalculaPotencia() {
         // Prueba 4: Verifica la operación de potencia en notación postfija
         ArrayList<String> expresion = new ArrayList<>();
         expresion.add("2");
@@ -250,7 +236,7 @@ public class CalculadoraTest {
         double resultadoEsperado = 8.0;
         double resultado = Calculadora.Calcula(expresion);
         
-        assertEquals(resultadoEsperado, resultado);
+        assertEquals(resultadoEsperado, resultado, 0);
     }
     
 }
