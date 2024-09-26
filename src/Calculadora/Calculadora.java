@@ -55,7 +55,7 @@ public class Calculadora {
     /**
      * Convierte una expresión infija a notación postfija para poder ser operada.
      * 
-     * @param String: aCalcular La expresión aritmética en formato infijo.
+     * @param aCalcular : aCalcular La expresión aritmética en formato infijo.
      * @return Una cadena que representa la expresión en notación postfija.
      */
     public static String aPostFijo(String aCalcular) {
