@@ -96,8 +96,14 @@ public class Calculadora {
                 //entonces saca la de menor precedencia y mete la siguiente
                 case '/':
                 case '*':
+              while (!operadores.isEmpty() && precedencia(evaluando) <= precedencia(operadores.peek())) {
+                        salida.append(operadores.pop()).append(" ");
+                    }
+                    operadores.push(evaluando);
+                    unario = true;
+                    break;
                 case '^':
-                    while (!operadores.isEmpty() && precedencia(evaluando) <= precedencia(operadores.peek())) {
+                    while (!operadores.isEmpty() && precedencia(evaluando) < precedencia(operadores.peek())) {
                         salida.append(operadores.pop()).append(" ");
                     }
                     operadores.push(evaluando);
