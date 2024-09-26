@@ -4,50 +4,32 @@
  */
 package Calculadora;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+
 
 /**
- *
- * @author rojas
+ * En esta clase se hacen pruebas sobre los métodos de la clase sintaxis
+ * @author Karol Cisneros, Equipo1
  */
 public class SintaxisTest {
     
     public SintaxisTest() {
     }
-    
-    @BeforeAll
-    public static void setUpClass() {
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
     /**
      * Test of balanceParentesis method, of class Sintaxis.
      */
     @Test
     public void testBalanceParentesis() {
-        System.out.println("balanceParentesis");
-        String cadena = "";
-        boolean expResult = false;
-        boolean result = Sintaxis.balanceParentesis(cadena);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String cadena = "(((()))";
+        assertFalse(Sintaxis.balanceParentesis(cadena)); // 
+        
+        String cadena2="34+(9+(8*(7-3*(8+4))))";
+        assertTrue(Sintaxis.balanceParentesis(cadena2));
+        
+        String cadena3="3+4)-(9-6";
+        assertFalse(Sintaxis.balanceParentesis(cadena3));
     }
 
     /**
@@ -55,14 +37,8 @@ public class SintaxisTest {
      */
     @Test
     public void testEsSimbolo() {
-        System.out.println("esSimbolo");
-        String cadena = "";
-        int pos = 0;
-        boolean expResult = false;
-        boolean result = Sintaxis.esSimbolo(cadena, pos);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String cadena = "3+3.5.4+78";
+        assertTrue(Sintaxis.esSimbolo(cadena, 1));
     }
 
     /**
@@ -70,14 +46,8 @@ public class SintaxisTest {
      */
     @Test
     public void testEsSimboloSinMenosMas() {
-        System.out.println("esSimboloSinMenosMas");
-        String cadena = "";
-        int pos = 0;
-        boolean expResult = false;
-        boolean result = Sintaxis.esSimboloSinMenosMas(cadena, pos);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String cadena = "3+3.5.4+78";
+        assertFalse(Sintaxis.esSimboloSinMenosMas(cadena, 1));
     }
 
     /**
@@ -85,13 +55,22 @@ public class SintaxisTest {
      */
     @Test
     public void testSintaxis() {
-        System.out.println("sintaxis");
-        String cadena = "";
-        boolean expResult = false;
-        boolean result = Sintaxis.sintaxis(cadena);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String cadena1=".5-5.9*(-3+5.)+78*(6+9)";
+        assertTrue(Sintaxis.sintaxis(cadena1));
+        String cadena2="+2+6*-(7-8)";
+        assertTrue(Sintaxis.sintaxis(cadena2));
+        String cadena = "3+3.5.4+78";
+        assertFalse(Sintaxis.sintaxis(cadena));
+        String cadena4="4+(.9)+5";
+        assertTrue(Sintaxis.sintaxis(cadena4));
+        String cadena5;
+        cadena5="5/+5";
+        assertTrue(Sintaxis.sintaxis(cadena5));
+        String cadena6;
+        cadena6="(7+6)-(+5-78)*-(90/3)^6*(-9+9)+-9";
+        assertTrue(Sintaxis.sintaxis(cadena6));
+        String cadena3="4+.+5";
+        assertFalse(Sintaxis.sintaxis(cadena3));
     }
     
 }
