@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author tanus
  */
-public class CalculadoraTest {
+public class CalculadoraIT {
     
-    public CalculadoraTest() {
+    public CalculadoraIT() {
     }
     
     @BeforeClass
@@ -123,7 +123,7 @@ public class CalculadoraTest {
         assertEquals("1 2 + 3 4 * + ", Calculadora.aPostFijo("(1 + 2) + (3 * 4)"));
 
         // Prueba con expresiones complejas
-        assertEquals("3 4 2 * 1 5 - 2 ^ 3 ^ / + ", Calculadora.aPostFijo("3 + 4 * 2 / (1 - 5) ^ 2 ^ 3"));
+        assertEquals("3 4 2 * 1 5 - 2 3 ^ ^ / + ", Calculadora.aPostFijo("3 + 4 * 2 / (1 - 5) ^ 2 ^ 3"));
     }
 
     
